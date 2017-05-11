@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  require 'BCrypt'
+  require 'bcrypt'
 
   has_secure_password
 end
