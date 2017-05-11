@@ -744,3 +744,528 @@ Migrating to CreateDecks (20170511165633)
   [1m[36mCard Load (0.3ms)[0m  [1m[34mSELECT  "cards".* FROM "cards" ORDER BY "cards"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mCard Load (0.3ms)[0m  [1m[34mSELECT  "cards".* FROM "cards" ORDER BY "cards"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mCard Load (0.3ms)[0m  [1m[34mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (19.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (19.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4253335321772056275);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateCards (20170510195307)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.2ms)[0m  [1m[35mCREATE TABLE "cards" ("id" serial primary key, "image" character varying, "color" character varying, "symbol" character varying, "number" character varying, "shading" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170510195307"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20170510232215)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170510232215"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGames (20170511164710)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "games" ("id" serial primary key, "points" integer, "time_end" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_games_on_user_id" ON "games"  ("user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170511164710"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDecks (20170511165633)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "decks" ("id" serial primary key, "game_id" integer, "card_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX  "index_decks_on_game_id" ON "decks"  ("game_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX  "index_decks_on_card_id" ON "decks"  ("card_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170511165633"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-05-11 22:24:21 UTC], ["updated_at", 2017-05-11 22:24:21 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4253335321772056275)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:24:31 UTC], ["updated_at", 2017-05-11 22:24:31 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro1l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro2l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3s.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3o.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/ro3l.png"], ["color", "red"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs1l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs2l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3s.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3o.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rs3l.png"], ["color", "red"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd1l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd2l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3s.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3o.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/rd3l.png"], ["color", "red"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go1l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go2l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3s.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3o.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/go3l.png"], ["color", "green"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs1l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs2l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3s.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3o.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gs3l.png"], ["color", "green"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd1l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd2l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3s.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3o.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/gd3l.png"], ["color", "green"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo1l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo2l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3s.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3o.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bo3l.png"], ["color", "blue"], ["symbol", "ovals"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs1l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs2l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3s.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3o.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bs3l.png"], ["color", "blue"], ["symbol", "squiggles"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd1l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "1"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd2l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "2"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3s.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "solid"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3o.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "open"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("image", "color", "symbol", "number", "shading", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["image", "/cards/bd3l.png"], ["color", "blue"], ["symbol", "diamonds"], ["number", "3"], ["shading", "lines"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["first_name", "Test"], ["last_name", "Tester"], ["username", "TTest"], ["email", "test@test.com"], ["password_digest", "$2a$10$bj2SiAtI8wsEOku60ncoYukUHNfoKhE6AMJoSHwumgnw0BtfsBpuW"], ["created_at", 2017-05-11 22:27:55 UTC], ["updated_at", 2017-05-11 22:27:55 UTC]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
