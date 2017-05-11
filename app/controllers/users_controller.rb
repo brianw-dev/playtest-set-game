@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to @user, notice: "User details are updated successfully"
     else
       render 'edit'
     end
@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(session[:id]).destroy
-    p "session id is : #{session[:id]}"
     logout
     flash[:success] = "User deleted"
     redirect_to users_url
