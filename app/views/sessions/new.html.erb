@@ -4,6 +4,8 @@
   <%= label :session, :password %>
   <%= password_field :session, :password %>
   <%= submit_tag "Login" %>
+
+  <%= render 'sessions/error_messages' %>
 <% end %>
 
 

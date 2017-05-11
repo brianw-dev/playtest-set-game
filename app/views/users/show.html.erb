@@ -4,7 +4,8 @@
 <p> Last Name: <%= @user.last_name %> </p>
 <p> Email: <%= @user.email %> </p>
 
-
+<p> <%= link_to 'Update', edit_user_path %></p>
+<p> <%= link_to 'Delete', user_path, method: "delete" %></p>
 <h2> Game History </h2>
 <p> Should display all the games with the scores .....</p>
 
