@@ -1,7 +1,6 @@
 class Game < ApplicationRecord
 
-  def add_cards
-    self.cards = []
+  def initial_deck
     i = 1
     81.times do
       self.cards << i
