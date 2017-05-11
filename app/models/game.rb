@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  belongs_to :user
 
   def initial_deck
     i = 1

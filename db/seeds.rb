@@ -14,3 +14,4 @@ while i < c.length
   i += 1
 end
 
+User.create(first_name: "Test", last_name: "Tester",username: "TTest", email: "test@test.com", password: "test" )
