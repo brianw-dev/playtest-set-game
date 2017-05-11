@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510232215) do
+ActiveRecord::Schema.define(version: 20170511165633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,24 @@ ActiveRecord::Schema.define(version: 20170510232215) do
     t.string   "shading"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_decks_on_card_id", using: :btree
+    t.index ["game_id"], name: "index_decks_on_game_id", using: :btree
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "points"
+    t.datetime "time_end"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
