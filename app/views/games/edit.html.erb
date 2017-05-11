@@ -1,0 +1,7 @@
+<% @cards.each do |card| %>
+  <%= form_for(@game) do |f| %>
+    <%= f.hidden_field :selected_card, value: card.id %>
+    <button>
+    <img src=<%= card.image %>></button>
+  <% end %>
+<% end %>

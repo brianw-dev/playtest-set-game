@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.integer :points
       t.datetime :time_end
       t.references :user
+      t.text :cards, :guess, array: true
 
       t.timestamps
     end
