@@ -20,15 +20,29 @@ module GamesHelper
     end
   end
 
-  def any_sets?(board)
+  def find_set(board)
     combinations = board.combination(3).to_a
-    sets = []
-    combinations.each do |potential_set|
-      if is_a_set?(potential_set)
-        sets << potential_set
+      sets = []
+      combinations.each do |potential_set|
+        if is_a_set?(potential_set)
+          sets << potential_set
+        end
       end
-    end
-    sets.length > 0
+      sets.first
+  end
+
+  def any_sets?(board)
+    !!find_set(board)
+  end
+
+  def display(game)
+    card_numbers = game.cards.first(12)
+    cards = card_numbers.map {|card| Card.find(card)}
+    cards
+  end
+
+  def convert_guesses(game)
+    game.guess.map {|guess| Card.find(guess)}
   end
 
 end
