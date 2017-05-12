@@ -1,4 +1,32 @@
+<style>
+table tr td{
+  border: 1px solid #2944a3;
+}
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2 }
+th {
+  background-color: #7f7fe5;
+  color: white;
+}
+</style>
+
 <h1>Game Index</h1>
 
-
+<table class="score-table">
+  <th colspan="3">Leaderboard</th>
+  <tr><td>Username</td>
+    <td>Date Played</td>
+    <td>Points</td>
+  </tr>
+  <% Game.all.order(points: :desc).limit(10).each do |game| %>
+    <tr>
+      <td><%= game.user.username %></td>
+      <td><%= game.created_at.strftime('%d  %b, %Y on %a at  %H:%M') %></td>
+      <td><%= game.points %> </td>
+    </tr>
+    <% end %>
+</table>
 <%= link_to 'New Game', new_game_path %>
