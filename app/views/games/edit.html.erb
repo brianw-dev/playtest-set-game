@@ -2,22 +2,34 @@
 
 <div class="container">
 
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+  <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+  <% @cards.each do |card| %>
+    <%= form_for(@game) do |f| %>
+      <%= f.hidden_field :selected_card, value: card.id %>
+      <center><button>
+      <img src=<%= card.image %>></button></center>
+    <% end %>
+  <% end %>
+  <% if @game.cards_shown < 18 %>
+    <%= form_for(@game) do |f| %>
+      <%= f.hidden_field :add_card, value: 3 %>
+      <center><button>
+      Add 3 Cards</button></center>
+    <% end %>
   <% end %>
 
-<% @cards.each do |card| %>
   <%= form_for(@game) do |f| %>
-    <%= f.hidden_field :selected_card, value: card.id %>
+    <%= f.hidden_field :find_set, value: "💩" %>
     <center><button>
-    <img src=<%= card.image %>></button></center>
+    Find Set</button></center>
   <% end %>
-<% end %>
-<% if @game.cards_shown < 18 %>
-  <%= form_for(@game) do |f| %>
-    <%= f.hidden_field :add_card, value: 3 %>
-    <center><button>
-    Add cards</button></center>
-  <% end %>
-<% end %>
 </div>
+  <% if @solution %>
+    SOLUTION:
+    <% @solution.each do |card| %>
+      <img src=<%= card.image %>>
+    <% end %>
+  <% end %>
