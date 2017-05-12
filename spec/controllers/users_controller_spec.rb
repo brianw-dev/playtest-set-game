@@ -53,7 +53,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "creates a new user in the database" do
-        expect(User.count).to eq 2
+        expect(User.count).to eq 3
       end
 
       it "assigns the newly created user as @user" do
@@ -79,7 +79,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "does not create a new user in the database" do
-        expect(User.count).to eq 1
+        expect(User.count).to eq 2
       end
 
       it "assigns the unsaved user as @user" do

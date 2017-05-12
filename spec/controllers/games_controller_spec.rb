@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
-  let!(:game) { Game.create }
+  User.create(first_name: "Billy", last_name: "Bob", username: "bob", email: "bob@gmail.com", password: "billybob")
+  let!(:game) { Game.create(user_id: 1) }
 
   describe "GET #index" do
     it "responds with status code 200" do
