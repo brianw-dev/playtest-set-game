@@ -9,16 +9,19 @@
   </head>
 
   <body>
+
   <header>
+    PLAYTEST INC
+    <a href="https://github.com/lil-boat/playtest-set-game" target="_blank"><img id="logo" src="/gamelogo.png"></a>
   <nav>
+    <%= link_to 'Play Set', games_path %>
     <% if session[:id] %>
-      <%= link_to 'Logout', session_path(session), method: "delete" %>
       <%= link_to 'Profile', user_path(session[:id]) %>
+      <%= link_to 'Logout', session_path(session), method: "delete" %>
     <% else %>
       <%= link_to 'Login', new_session_path %>
-      <%= link_to 'Sign Up', new_user_path %> 
+      <%= link_to 'Sign Up', new_user_path %>
     <% end %>
-    <%= link_to 'Play Set', games_path %>
 
   </nav>
   </header>

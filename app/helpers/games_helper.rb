@@ -36,7 +36,7 @@ module GamesHelper
   end
 
   def display(game)
-    card_numbers = game.cards.first(12)
+    card_numbers = game.cards.first(game.cards_shown)
     cards = card_numbers.map {|card| Card.find(card)}
     cards
   end
