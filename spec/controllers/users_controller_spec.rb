@@ -65,7 +65,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "redirects to the created user" do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to games_path
       end
     end
 

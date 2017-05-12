@@ -13,17 +13,14 @@ class GamesController < ApplicationController
   def create
     @game = Game.new
     @game.initial_deck
-    # @game.guess = []
     @game.cards = @game.cards.shuffle
     if current_user
       @game.user = current_user
-    else
-      redirect_to new_user_path
     end
     if @game.save
       redirect_to edit_game_path(@game)
     else
-      render :new, status: 422
+      redirect_to new_user_path, status: 422
     end
   end
 
