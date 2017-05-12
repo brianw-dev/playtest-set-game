@@ -1,3 +1,4 @@
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -14,3 +15,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// = require fusioncharts/fusioncharts
+// = require fusioncharts/fusioncharts.charts
+// = require fusioncharts/themes/fusioncharts.theme.fint
+
+$(document).ready(function(){
+
+})
