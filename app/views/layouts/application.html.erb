@@ -6,23 +6,28 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
   </head>
 
   <body>
 
   <header>
-    PLAYTEST INC
-    <a href="https://github.com/lil-boat/playtest-set-game" target="_blank"><img id="logo" src="/gamelogo.png"></a>
   <nav>
-    <%= link_to 'Play Set', games_path %>
-    <% if session[:id] %>
-      <%= link_to 'Profile', user_path(session[:id]) %>
-      <%= link_to 'Logout', session_path(session), method: "delete" %>
-    <% else %>
-      <%= link_to 'Login', new_session_path %>
-      <%= link_to 'Sign Up', new_user_path %>
-    <% end %>
+   <div class="nav-wrapper">
+    <a class="brand-logo" href="https://github.com/lil-boat/playtest-set-game" target="_blank">PLAYTEST INC<img id="logo" src="/gamelogo.png"></a>
 
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><%= link_to 'Play Set', games_path %></li>
+        <% if session[:id] %>
+          <li><%= link_to 'Profile', user_path(session[:id]) %></li>
+          <li><%= link_to 'Logout', session_path(session), method: "delete" %></li>
+        <% else %>
+          <li><%= link_to 'Login', new_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+        <% end %>
+      </ul>
+    </div>
   </nav>
   </header>
     <%= yield %>

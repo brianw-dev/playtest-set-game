@@ -22,9 +22,18 @@ html {
 }
 
 #logo {
-  width: 3%;
+  width: 5%;
+  margin-left: 2%;
 }
 
 nav {
   float: right;
+}
+
+.nav-wrapper {
+  background-color: darkgray
+}
+
+a {
+  color: #663399;
 }
