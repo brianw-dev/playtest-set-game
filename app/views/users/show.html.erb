@@ -1,3 +1,20 @@
+<style>
+table tr td{
+  border: 1px solid #2944a3;
+}
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2 }
+th {
+  background-color: #7f7fe5;
+  color: white;
+}
+</style>
+
+
+
 <h1> Welcome <%= @user.username %> </h1>
 
 <p> First Name: <%= @user.first_name %>  </p>
@@ -5,9 +22,29 @@
 <p> Email: <%= @user.email %> </p>
 
 <p> <%= link_to 'Update Profiles', edit_user_path %></p>
+<p> <%= link_to 'Delete Account', user_path, method: "delete" %></p>
 
 <h2> Game History </h2>
 <p> Should display all the games with the scores .....</p>
 
 
-<p> <%= link_to 'Delete Account', user_path, method: "delete" %></p>
+
+<div class="set-history">
+  <h3>Set:</h3>
+  <ul>
+    <li>Games count: <%= @user.games.count %></li>
+    <li>Best result: <%= @user.top_score %></li>
+    <li>Average result: <%= @user.average_score %></li>
+  </ul>
+
+<table class="score-table">
+  <th colspan="2">Best games</th>
+  <% @user.top_five_games.each do |game| %>
+    <tr><td><%= game.created_at.strftime('%d  %b, %Y on %a at  %H:%M') %></td>
+      <td><%= game.points %> </td>
+    </tr>
+    <% end %>
+</table>
+
+</div>
+</div>

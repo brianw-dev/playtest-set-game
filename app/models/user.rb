@@ -13,4 +13,16 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
   has_many :games
+
+  def top_score
+    self.games.order(points: :desc).limit(1).first.points
+  end
+
+  def average_score
+    self.games.map{|g| g.points}.reduce(:+)/self.games.count
+  end
+
+  def top_five_games
+    self.games.order(points: :desc).limit(5)
+  end
 end
