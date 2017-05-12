@@ -20,3 +20,11 @@ button {
 html {
   background-color: Lavender;
 }
+
+#logo {
+  width: 3%;
+}
+
+nav {
+  float: right;
+}
