@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: 'User was successfully created.', status: 302
+      login(@user)
+      redirect_to games_path, notice: 'User was successfully created.', status: 302
     else
       render :new, status: 422
     end
