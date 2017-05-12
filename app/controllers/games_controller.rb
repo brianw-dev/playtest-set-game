@@ -42,7 +42,6 @@ class GamesController < ApplicationController
         render :edit
     elsif params[:game][:find_set] == "💩"
       @solution = find_set(@cards)
-      p "*" * 100
       if @solution == nil  && @game.cards.count < 12
         flash[:notice] = "Game Over, no more SETs!"
       elsif @solution == nil

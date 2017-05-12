@@ -99,14 +99,14 @@ RSpec.describe GamesController, type: :controller do
   # describe "POST #update" do
   #   context "when valid params are passed" do
   #     it "responds with status code 302" do
-  #       post(:update, params: { game: { user_throw: "paper" }})
+  #       post(:update, params: { game: { user_id: current_user.id }})
   #       expect(response).to have_http_status 302
   #     end
 
-  #     it "updates a new game in the database" do
-  #       initial= Game.all.length
-  #       post(:update, params: { game: { user_throw: "paper" }})
-  #       expect(Game.all.length).to eq (initial + 1)
+  #     it "does not add games to database" do
+  #       initial = Game.all.length
+  #       post(:update, params: { game: { user_id: current_user.id }})
+  #       expect(Game.all.length).to eq (initial)
   #     end
 
   #     it "assigns the newly updated game as @game" do
