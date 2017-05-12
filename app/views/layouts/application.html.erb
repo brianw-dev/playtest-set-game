@@ -9,6 +9,19 @@
   </head>
 
   <body>
+  <header>
+  <nav>
+    <ul>
+    <% if session[:id] %>
+      <li> <%= link_to 'LOGOUT', session_path(session), method: "delete" %></li>
+      <li> <%= link_to 'PROFILE', user_path(session[:id]) %></li>
+    <% else %>
+      <li> <%= link_to 'LOGIN', new_session_path %></li>
+      <li> <%= link_to 'SIGN UP', new_user_path %> </li>
+    <% end %>
+    </ul>
+  </nav>
+  </header>
     <%= yield %>
   </body>
 </html>
