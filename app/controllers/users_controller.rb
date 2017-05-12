@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:id])
+    @chart = @user.bar_chart
   end
 
 
