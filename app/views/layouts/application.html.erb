@@ -11,15 +11,15 @@
   <body>
   <header>
   <nav>
-    <ul>
     <% if session[:id] %>
-      <li> <%= link_to 'LOGOUT', session_path(session), method: "delete" %></li>
-      <li> <%= link_to 'PROFILE', user_path(session[:id]) %></li>
+      <%= link_to 'Logout', session_path(session), method: "delete" %>
+      <%= link_to 'Profile', user_path(session[:id]) %>
     <% else %>
-      <li> <%= link_to 'LOGIN', new_session_path %></li>
-      <li> <%= link_to 'SIGN UP', new_user_path %> </li>
+      <%= link_to 'Login', new_session_path %>
+      <%= link_to 'Sign Up', new_user_path %> 
     <% end %>
-    </ul>
+    <%= link_to 'Play Set', games_path %>
+
   </nav>
   </header>
     <%= yield %>

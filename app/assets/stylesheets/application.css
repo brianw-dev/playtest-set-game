@@ -13,6 +13,10 @@ form {
 
 button {
   background-color: white;
-  border-color: white;
-  border-style: none;
+  border-color: black;
+  border-style: solid;
+}
+
+html {
+  background-color: Lavender;
 }

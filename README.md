@@ -9,7 +9,9 @@ Harini : hariniGB
 
 ## Description of Project
 Deploying a basic version of the traditional set game using Ruby on Rails and Javascript. 
-Instructions and a description of the game can be found here: http://www.setgame.com/set/puzzle
+Instructions and a description of the game can be found here: 
+	http://www.setgame.com/set/puzzle
+	http://www.setgame.com/set/puzzle_rules
 
 ## How to Install Code Locally
 TBA

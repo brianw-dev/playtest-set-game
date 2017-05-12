@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
   User.create(first_name: "Billy", last_name: "Bob", username: "bob", email: "bob@gmail.com", password: "billybob")
+  let!(:current_user) { User.first }
   let!(:game) { Game.create(user_id: 1) }
 
   describe "GET #index" do
@@ -57,23 +58,27 @@ RSpec.describe GamesController, type: :controller do
   describe "POST #create" do
     context "when valid params are passed" do
       it "responds with status code 302" do
-        post(:create, params: { game: { user_throw: "paper" }})
+        session[:id] = 1
+        post(:create, params: { game: { user_id: current_user.id }})
         expect(response).to have_http_status 302
       end
 
       it "creates a new game in the database" do
         initial= Game.all.length
-        post(:create, params: { game: { user_throw: "paper" }})
+        session[:id] = 1
+        post(:create, params: { game: { user_id: current_user.id }})
         expect(Game.all.length).to eq (initial + 1)
       end
 
       it "assigns the newly created game as @game" do
+        session[:id] = 1
         post :create
         expect(assigns(:game)).to eq(Game.last)
       end
 
       it "redirects to the created game" do
-        post :create, params: { game: { user_throw: "paper" } }
+        session[:id] = 1
+        post :create, params: { game: { user_id: 1 } }
         expect(response).to redirect_to(edit_game_path(Game.last))
       end
     end
