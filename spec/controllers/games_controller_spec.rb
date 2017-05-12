@@ -21,22 +21,17 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
-  # describe "GET #show" do
-  #   it "responds with status code 200" do
-  #     get :show, params: { id: game.id }
-  #     expect(response).to have_http_status 200
-  #   end
+  describe "GET #show" do
+    it "responds with status code 200" do
+      get :show, params: { id: game.id }
+      expect(response).to have_http_status 302
+    end
 
-  #   it "assigns the correct game as @game" do
-  #     get :show, params: { id: game.id }
-  #     expect(assigns(:game)).to eq(game)
-  #   end
-
-  #   it "renders the :show template" do
-  #     get :show, params: { id: game.id }
-  #     expect(response).to render_template(:show)
-  #   end
-  # end
+    it "redirects to the edit game path" do
+      get :show, params: { id: game.id }
+      expect(response).to redirect_to(edit_game_path(Game.last))
+    end
+  end
 
   describe "GET #new" do
     it "responds with status code 200" do
@@ -125,4 +120,5 @@ RSpec.describe GamesController, type: :controller do
   #     end
   #   end
   # end
+
 end

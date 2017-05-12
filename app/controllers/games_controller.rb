@@ -42,6 +42,12 @@ class GamesController < ApplicationController
         render :edit
     elsif params[:game][:find_set] == "💩"
       @solution = find_set(@cards)
+      p "*" * 100
+      if @solution == nil  && @game.cards.count < 12
+        flash[:notice] = "Game Over, no more SETs!"
+      elsif @solution == nil
+        flash[:notice] = "No available SETs, please add cards"
+      end
       render :edit
     elsif !@game.guess.include?(params[:game][:selected_card])
       @game.guess << params[:game][:selected_card]
@@ -49,7 +55,10 @@ class GamesController < ApplicationController
       @guesses = convert_guesses(@game)
       if @game.guess.length == 3 && is_a_set?(@guesses)
         @game.cards = @game.cards - @game.guess
-        @game.update_attributes({guess: [], points: @game.points + 10, cards_shown: @game.cards_shown - 3})
+        @game.update_attributes({guess: [], points: @game.points + 10})
+        if @game.cards_shown > 12
+          @game.update_attributes({cards_shown: @game.cards_shown - 3})
+        end
         flash[:notice] = "🙌 You found a set! 🎉"
         redirect_to edit_game_path(@game)
       elsif @game.guess.length >= 3
