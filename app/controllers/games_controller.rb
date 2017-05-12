@@ -15,7 +15,7 @@ class GamesController < ApplicationController
     @game.initial_deck
     # @game.guess = []
     @game.cards = @game.cards.shuffle
-    @game.user = User.first
+    @game.user = current_user
     if @game.save
       redirect_to edit_game_path(@game)
     else
