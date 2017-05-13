@@ -1,18 +1,20 @@
 # Playtest Inc. - A Set Game
 Simple, Heroku-friendly Rails app configuration build on Ruby.
-Build Status
+Build Status: 
+[![Build Status](https://travis-ci.org/lil-boat/playtest-set-game.svg?branch=master)](https://travis-ci.org/lil-boat/playtest-set-game)
+
 ## Members
-Fei Li: lifangfei
-Harini : hariniGB
-Brian Wong: lil-boat
-Denise Duffy: duffydduffyd
-Eli Berger: erberger22
+* Fei Li: lifangfei
+* Harini : hariniGB
+* Brian Wong: lil-boat
+* Denise Duffy: duffydduffyd
+* Eli Berger: erberger22
 
 ## Description of Project
 Deploying a basic version of the traditional set game using Ruby on Rails and Javascript.
 Instructions and a description of the game can be found here:
-	http://www.setgame.com/set/puzzle
-	http://www.setgame.com/set/puzzle_rules
+* http://www.setgame.com/set/puzzle
+* http://www.setgame.com/set/puzzle_rules
 
 ## How to Install Code Locally
 1. install ruby 2.3.1
