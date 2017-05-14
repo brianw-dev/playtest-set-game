@@ -1,11 +1,23 @@
-<%= form_tag password_reset_path do %>
-  <%= label :user, :username %>
-  <%= text_field :user, :username  %>
-  <%= label :user, :email %>
-  <%= text_field :user, :email  %>
-  <%= label :user, :phone_number %>
-  <%= text_field :user, :phone_number  %>
-  <%= submit_tag "Get OTP" %>
-  <%= render 'password_resets/error_messages' %>
+<% provide(:title, "Forget Password") %>
+<%= form_tag password_resets_path do %>
+  <p>
+    <%= label :user, :username %>
+  </p>
+  <p>
+    <%= text_field :user, :username  %>
+  </p>
+  <p>
+    <%= label :user, :email %>
+  </p>
+  <p>
+    <%= text_field :user, :email  %>
+  </p>
+  <p>
+    <%= label :user, :phone_number %>
+  </p>
+  <p>
+    <%= text_field :user, :phone_number  %>
+  </p>
+    <%= submit_tag "Get OTP" %>
+    <%= render 'password_resets/error_messages' %>
 <% end %>
-

@@ -1,11 +1,10 @@
 class PasswordResetsController < ApplicationController
- # def index
- # end
+
  def new
-  @user = User.new
+  @otp_user = User.new
  end
 
- def update
+ def create
   @user = User.find_by(email: user_params[:email])
   if @user && @user.phone_number == user_params[:phone_number]
     otp = random_otp
