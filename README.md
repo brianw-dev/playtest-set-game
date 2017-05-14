@@ -1,7 +1,7 @@
 # Playtest Inc. - A Set Game
 Simple, Heroku-friendly Rails app configuration build on Ruby.
 Build Status: 
-[![Build Status](https://travis-ci.org/lil-boat/playtest-set-game.svg?branch=master)](https://travis-ci.org/lil-boat/playtest-set-game)
+[![Build Status](https://travis-ci.org/lil-boat/playtest-set-game.svg?branch=development)](https://travis-ci.org/lil-boat/playtest-set-game)
 
 ## Members
 * Fei Li: lifangfei
