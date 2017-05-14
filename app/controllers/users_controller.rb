@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      redirect_to games_path, notice: 'User was successfully created.', status: 302
+      flash[:notice] = 'User was successfully created.'
+      redirect_to games_path, status: 302
     else
       render :new, status: 422
     end
@@ -50,6 +51,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :phone_number)
   end
 end

@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { should have_db_column(:username) }
     it { should have_db_column(:email) }
     it { should have_db_column(:password_digest) }
+    it { should have_db_column(:phone_number)}
   end
 
   describe "validations" do
@@ -15,6 +16,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:username) }
     it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:phone_number)}
   end
 
   describe "associations" do

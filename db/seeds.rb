@@ -15,4 +15,4 @@ while i < c.length
 end
 
 
-User.create(first_name: "Test", last_name: "Tester",username: "TTest", email: "test@test.com", password: "test" )
+User.create(first_name: "Test", last_name: "Tester",username: "TTest", email: "test@test.com", password: "test1234", phone_number: '+18707406052' )

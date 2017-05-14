@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
- let!(:user) {User.create!(first_name: "Test", last_name: "tester", username: "TTest", email: "test@test.com", password: "123456")}
+ let!(:user) {User.create!(first_name: "Test", last_name: "tester", username: "TTest", email: "test@test.com", password: "123456", phone_number: '+18765432100')}
   describe "GET new" do
     it "responds with status code 200" do
       get :new

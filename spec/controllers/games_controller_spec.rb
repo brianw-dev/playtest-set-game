@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
-  User.create(first_name: "Billy", last_name: "Bob", username: "bob", email: "bob@gmail.com", password: "billybob")
+  User.create(first_name: "Billy", last_name: "Bob", username: "bob", email: "bob@gmail.com", password: "billybob", phone_number: '+18765432100')
   let!(:current_user) { User.first }
   let!(:game) { Game.create(user_id: 1) }
 
