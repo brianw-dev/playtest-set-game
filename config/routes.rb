@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :games
   resources :users
   resources :sessions, only: [:new,:create,:destroy]
-  resources :games
+  resources :password_resets, only: [:new, :update]
 end

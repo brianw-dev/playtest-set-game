@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let!(:user) {User.create!(first_name: "Test", last_name: "tester", username: "TTest", email: "test@test.com", password: "123456")}
+  let!(:user) {User.create!(first_name: "Test", last_name: "tester", username: "TTest", email: "test@test.com", password: "123456", phone_number: "+18765432100")}
 
   describe "GET #index" do
 
@@ -45,7 +45,7 @@ RSpec.describe UsersController, type: :controller do
     context "when valid params are passed" do
 
       before do
-        post :create, params: { user: { first_name: "Test2", last_name: "Tester", username: "TTester", email: "test2@test.com", password: "123456"} }
+        post :create, params: { user: { first_name: "Test2", last_name: "Tester", username: "TTester", email: "test2@test.com", password: "123456", phone_number: "+18765432103"} }
       end
 
       it "responds with status code 302" do
